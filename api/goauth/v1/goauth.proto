@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package api.goauth.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "goauth/api/goauth/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.goauth.v1";
+
+service GoAuth {
+//	User api
+	rpc Register (RegisterRequest) returns (RegisterReply) {
+		option (google.api.http) = {
+			post: "api/v1/users"
+			body: "*"
+		};
+	};
+	rpc Login (LoginRequest) returns (LoginReply) {
+		option (google.api.http) = {
+			put: "api/v1/users"
+			body: "*"
+		};
+	};
+
+}
+
+// Register messages
+message RegisterRequest {
+	string username = 1;
+	string password = 2;
+	int64 age = 3;
+	string gender = 4;
+}
+message RegisterReply {
+	int64 id = 1;
+	string username = 2;
+	int64 age = 3;
+	string gender = 4;
+}
+
+// Login messages
+message LoginRequest {
+	string username = 1;
+	string password = 2;
+}
+message LoginReply {
+	int64 id = 1;
+	string username = 2;
+	int64 age = 3;
+	string gender = 4;
+}

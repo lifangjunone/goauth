@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package api.user.v1;
+
+
+option go_package = "goauth/api/user/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.user.v1";
+
+service User {
+	rpc CreateUser (CreateUserRequest) returns (CreateUserReply);
+	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserReply);
+	rpc DeleteUser (DeleteUserRequest) returns (DeleteUserReply);
+	rpc GetUser (GetUserRequest) returns (GetUserReply);
+	rpc ListUser (ListUserRequest) returns (ListUserReply);
+}
+
+message CreateUserRequest {
+	string username = 1;
+	string password = 2;
+	int64 age = 3;
+	string gender = 4;
+}
+message CreateUserReply {
+	int64 id = 1;
+	string username = 2;
+	int64 age = 3;
+	string gender = 4;
+}
+
+message UpdateUserRequest {
+	int64 id = 1;
+	string username = 2;
+	int64 age = 3;
+	string gender = 4;
+}
+message UpdateUserReply {
+	int64 id = 1;
+	string username = 2;
+	int64 age = 3;
+	string gender = 4;
+}
+
+message DeleteUserRequest {
+	int64 id = 1;
+}
+message DeleteUserReply {
+	bool ok = 1;
+}
+
+message GetUserRequest {
+	int64 id = 1;
+}
+message GetUserReply {
+	int64 id = 1;
+	string username = 2;
+	int64 age = 3;
+	string gender = 4;
+}
+
+message ListUserRequest {}
+message ListUserReply {
+	message User {
+		int64 id = 1;
+		string username = 2;
+		int64 age = 3;
+		string gender = 4;
+	}
+	repeated User user = 1;
+}
